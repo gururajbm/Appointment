@@ -90,10 +90,12 @@ public class SlotDao {
         try {
             PreparedStatement ps
                 = connection.prepareStatement(
-                    "SELECT * FROM slot WHERE start_time >= ? AND end_time <= ?"
+                    "SELECT * FROM slot WHERE start_time " +
+                    " BETWEEN ? AND ? OR ? BETWEEN start_time AND end_time"
                 );
             ps.setString(1, startTime);
             ps.setString(2, endTime);
+            ps.setString(3, startTime);
             ResultSet rs = ps.executeQuery();
 
             List slots = new ArrayList();
