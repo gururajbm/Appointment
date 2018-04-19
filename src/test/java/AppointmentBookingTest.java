@@ -28,12 +28,23 @@ public class AppointmentBookingTest {
 
     private void getListOfFreeSlotsForGivenDates(String[][] slotDates) {
         for (String[] slotDate : slotDates) {
-            slot.setStartTime(slotDate[0]);
-            slot.setEndTime(slotDate[1]);
-            slot.setCreateUserId(1);
-            slot.setStatus("free");
-            slotList.add(slot);
+            slotList.add(createSlot(slotDate, "free"));
         }
+    }
+
+    private void getListOfAppointmentSlotsForGivenDates(String[][] slotDates) {
+        for (String[] slotDate : slotDates) {
+            slotList.add(createSlot(slotDate, "booked"));
+        }
+    }
+
+    private Slot createSlot(String[] slotDate, String slotType) {
+        slot.setStartTime(slotDate[0]);
+        slot.setEndTime(slotDate[1]);
+        slot.setCreateUserId(1);
+        slot.setStatus(slotType);
+
+        return slot;
     }
 
     @Test
