@@ -1,18 +1,20 @@
 CREATE APPOINTMENT FOR ADMIN
 
-1. Validate appointment does not exist for given booking period.
-2. Delete all free slot in between given appointment period.
-2. check if any slot overlap start of appointment
-3. if there is overlap create a slot with time left after time taken by appointment.
-4  check if any slot overlap at end of appointment
-5. If there is overlap create a slot with time left after time taken by appointment
+1. Validate appointment date difference is 15 min and max 24 hours within a day
+2. Validate appointment does not exist for given booking period.
+3. Delete all free slot in between given appointment period.
+4. check if any slot overlap start of appointment
+5. if there is overlap create a slot with time left after time taken by appointment.
+6  check if any slot overlap at end of appointment
+7. If there is overlap create a slot with time left after time taken by appointment
 
 
 CREATE APPOINTMENT FOR CLINICIAN
 
-1. Validate already appointment does not exist for given booking period.
-2. Validate free slot available for given booking period.
-3. create appointment
-4. check in the begining of appointment is there any time left in the slot, make that as free slot.
-5. check in the end of appointment is there any time left in the slot, make that as free slot.
+1. Validate appointment date difference is 15 min and max 24 hours within a day
+2. Validate already appointment does not exist for given booking period.
+3. Validate free slot available for given booking period.
+4. create appointment
+5. check in the begining of appointment is there any time left in the slot, make that as free slot.
+6. check in the end of appointment is there any time left in the slot, make that as free slot.
 

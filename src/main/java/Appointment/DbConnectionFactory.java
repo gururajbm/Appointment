@@ -1,3 +1,5 @@
+package Appointment;
+
 import com.mysql.jdbc.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;

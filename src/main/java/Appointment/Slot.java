@@ -1,3 +1,5 @@
+package Appointment;
+
 public class Slot {
 
     private Integer id;
