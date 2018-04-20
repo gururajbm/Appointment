@@ -2,12 +2,21 @@ package Appointment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AppointmentBooking {
 
-    public Boolean isFreeSlotExistForBooking(String startDateTime, String endDateTime) {
-        return true;
+    private SlotDao slotDao;
+    private Slot slot;
+
+    public void setSlotDao(SlotDao slotDao) {
+        this.slotDao = slotDao;
+    }
+
+    public SlotDao getSlotDao() {
+        return this.slotDao;
     }
 
     public Boolean isAppointmentStartTimeLessThanEndTime(String startDateTime, String endDateTime) {
@@ -63,4 +72,17 @@ public class AppointmentBooking {
            throw e;
        }
    }
+
+    public Boolean isAppointmentExist(String startDateTime, String endDateTime) {
+        List<Slot> slots = new ArrayList();
+        slot = new Slot();
+        slots = getSlotDao().getSlotsBetweenStartAndEndTime(startDateTime, endDateTime);
+        for (Slot slot : slots) {
+            if (slot.getStatus() == "booked") {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

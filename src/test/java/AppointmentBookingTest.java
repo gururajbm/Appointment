@@ -21,9 +21,9 @@ public class AppointmentBookingTest {
     @Before
     public void setUp() {
         appointmentBook = new AppointmentBooking();
-        slotDao = mock(SlotDao.class);
         slotList = new ArrayList();
-        slot = new Slot();
+        slotDao = mock(SlotDao.class);
+        appointmentBook.setSlotDao(slotDao);
     }
 
     private void getListOfFreeSlotsForGivenDates(String[][] slotDates) {
@@ -39,6 +39,7 @@ public class AppointmentBookingTest {
     }
 
     private Slot createSlot(String[] slotDate, String slotType) {
+        slot = new Slot();
         slot.setStartTime(slotDate[0]);
         slot.setEndTime(slotDate[1]);
         slot.setCreateUserId(1);
@@ -102,12 +103,12 @@ public class AppointmentBookingTest {
     }
 
     @Test
-    public void testAppointmentGet_betweenRange() {
+    public void test_anyAppointmentAlreadyExist_isInvalid() {
         String[][] slotDates = {
             {"2018-04-18 09:00:00","2018-04-18 10:00:00"},
-            {"2018-04-18 10:01:00","2018-04-18 11:00:00"}
+            {"2018-04-18 10:00:01","2018-04-18 11:00:00"}
         };
-        getListOfFreeSlotsForGivenDates(slotDates);
+        getListOfAppointmentSlotsForGivenDates(slotDates);
         when(
             slotDao.getSlotsBetweenStartAndEndTime(
                 "2018-04-18 09:00:00",
@@ -116,7 +117,7 @@ public class AppointmentBookingTest {
         ).thenReturn(slotList);
 
         Boolean result
-            = appointmentBook.isFreeSlotExistForBooking("2018-04-18 09:00:00", "2018-04-18 10:00:00");
-        Assert.assertEquals(true, result);
+            = appointmentBook.isAppointmentExist("2018-04-18 09:00:00", "2018-04-18 10:00:00");
+        Assert.assertEquals(false, result);
     }
 }

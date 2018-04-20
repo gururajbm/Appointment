@@ -55,4 +55,8 @@ public class Slot {
     public Integer getBookedUserId() {
         return this.bookedUserId;
     }
+
+    public String getStatus() {
+        return this.status;
+    }
 }
